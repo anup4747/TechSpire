@@ -2,11 +2,7 @@
 
 # install all dependancies
 
-pip install Flask
-pip install tensorflow
-pip install numpy
-pip install pillow
-pip install werkzeug
+pip install Flask tensorflow numpy pillow werkzeug
 
 # verify dependancies 
 pip list | grep -E 'Flask|tensorflow|numpy|pillow|werkzeug'
