@@ -1,0 +1,31 @@
+<!-- from flask import Flask, render_template, request, redirect, url_for
+
+app = Flask(__name__)
+
+@app.route('/feedback', methods=['GET', 'POST'])
+def submit_feedback():
+    if request.method == 'POST':
+        feedback_text = request.form.get('feedback')
+        print("User Feedback:", feedback_text)  # Replace with database storage logic
+        return redirect(url_for('submit_feedback'))
+    return render_template('feedback.html')
+
+if __name__ == '__main__':
+    app.run(debug=True) -->
+{% include 'navbar.html' %}
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='main2.css') }}" />
+</head>
+<div class="feedback-section">
+  <h2>Your Feedback Matters</h2>
+  <p>Help us improve by sharing your thoughts on our platform.</p>
+  <form method="POST" action="/submitfeedback">
+    <textarea
+      name="feedback"
+      rows="4"
+      placeholder="Enter your feedback..."
+    ></textarea>
+    <br />
+    <button type="submit">Submit Feedback</button>
+  </form>
+</div>

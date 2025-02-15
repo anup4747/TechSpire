@@ -1,0 +1,364 @@
+/* chat bot */
+.chatbot-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 90vh;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.chat-window {
+  flex-grow: 1;
+  width: 100%;
+  max-width: 400px;
+  height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 10px;
+  background: white;
+}
+
+.message {
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 10px;
+  max-width: 70%;
+  word-wrap: break-word;
+}
+
+.user {
+  background-color: #34d399;
+  color: white;
+  align-self: flex-end;
+  text-align: right;
+}
+
+.bot {
+  background-color: #e5e7eb;
+  color: black;
+  align-self: flex-start;
+}
+
+.input-area {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.input-area input {
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.input-area button {
+  background: #34d399;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* herooooo */
+
+.hero-section {
+  position: relative;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, #bbf7d0, white, #bfdbfe);
+  opacity: 0.5;
+  filter: blur(20px);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #166534;
+}
+
+.hero-content p {
+  font-size: 1.25rem;
+  color: #374151;
+  margin-top: 10px;
+}
+
+.hero-btn {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #16a34a;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.hero-btn:hover {
+  background-color: #15803d;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* navbar */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: linear-gradient(to bottom, white, transparent);
+  backdrop-filter: blur(10px);
+  padding: 15px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: green;
+  text-decoration: none;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li {
+  display: inline-block;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 16px;
+  color: black;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: green;
+}
+
+/* plant disease  */
+
+.disease-identifier {
+  text-align: center;
+  margin-top: 80px;
+}
+
+.disease-identifier h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #166534;
+}
+
+.disease-identifier p {
+  color: #374151;
+  margin-bottom: 15px;
+}
+
+.upload-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #16a34a;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  margin: 0 auto;
+  cursor: pointer;
+  text-align: center;
+}
+
+.preview-box {
+  width: 100%;
+  height: 150px;
+  background-color: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+}
+
+.upload-box span {
+  color: #16a34a;
+  font-size: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #16a34a;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #15803d;
+}
+
+/* weather */
+
+.weather-container {
+  text-align: center;
+  margin: 40px auto;
+  max-width: 600px;
+  background: #f8fafc;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.current-weather {
+  background: #d1fae5;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 1.5rem;
+}
+
+.weather-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.weather-stats div {
+  background: #e0f2fe;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.hourly-forecast,
+.daily-forecast {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.hour,
+.day {
+  background: #e0f2fe;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* feedback */
+
+.feedback-section {
+  padding: 50px 20px;
+  background-color: #f3f4f6;
+  text-align: center;
+}
+
+.feedback-section h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #166534;
+  margin-bottom: 20px;
+}
+
+.feedback-section p {
+  color: #374151;
+  max-width: 600px;
+  margin: 0 auto 20px;
+}
+
+.feedback-section textarea {
+  width: 75%;
+  max-width: 500px;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.feedback-section button {
+  margin-top: 15px;
+  padding: 12px 24px;
+  background-color: #16a34a;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.feedback-section button:hover {
+  background-color: #15803d;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* footer */
+
+.footer {
+  background-color: #166534;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 50px;
+}
+
+.footer p {
+  font-size: 1.1rem;
+}
+
+.footer-links {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  transition: text-decoration 0.3s ease;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,38 @@
+{% include 'navbar.html' %}
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main2.css') }}">
+</head>
+
+<div class="disease-identifier">
+    <h1>Plant Disease Identifier</h1>
+    <p>Upload a photo of your plant to identify potential diseases</p>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <label for="upload" class="upload-box">
+            <div id="preview" class="preview-box">
+                <span id="upload-text">Click to upload image</span>
+            </div>
+        </label>
+        <input id="upload" type="file" name="image" accept="image/*" class="hidden" onchange="previewImage(event)">
+        <button type="submit">Identify Disease</button>
+    </form>
+</div>
+
+<script>
+    function previewImage(event) {
+        const file = event.target.files[0];
+        const previewBox = document.getElementById('preview');
+        const uploadText = document.getElementById('upload-text');
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                previewBox.style.backgroundImage = `url(${e.target.result})`;
+                uploadText.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
+

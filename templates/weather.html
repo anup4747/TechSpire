@@ -1,0 +1,50 @@
+
+{% include 'navbar.html' %}
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main2.css') }}">
+</head>
+<div class="weather-container">
+    <h1>{{ city }}</h1>
+    <p>{{ date }}</p>
+
+    <div class="current-weather">
+        <div>
+            <h2>{{ temp }}°C</h2>
+            <p>Feels like {{ feels_like }}°C</p>
+            <p>{{ condition }}</p>
+        </div>
+    </div>
+
+    <div class="weather-stats">
+        <div><span>🌧️ Rain:</span> {{ rain_chance }}</div>
+        <div><span>💨 Wind:</span> {{ wind }}</div>
+        <div><span>💧 Humidity:</span> {{ humidity }}</div>
+        <div><span>🌡️ Pressure:</span> {{ pressure }}</div>
+        <div><span>☁️ Clouds:</span> {{ clouds }}</div>
+        <div><span>🌅 Sunrise:</span> {{ sunrise }}</div>
+        <div><span>🌇 Sunset:</span> {{ sunset }}</div>
+    </div>
+
+    <h2>Hourly Forecast</h2>
+    <div class="hourly-forecast">
+        {% for hour in hourly_forecast %}
+            <div class="hour">
+                <p>{{ hour.hour }}</p>
+                <span>☀️</span>
+                <p>{{ hour.temp }}°C</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <h2>Daily Forecast</h2>
+    <div class="daily-forecast">
+        {% for day in daily_forecast %}
+            <div class="day">
+                <p>{{ day.day }}</p>
+                <p>{{ day.condition }}</p>
+                <p>{{ day.low }}°C - {{ day.high }}°C</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>

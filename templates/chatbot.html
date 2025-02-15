@@ -1,0 +1,41 @@
+{% include 'navbar.html' %}
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main2.css') }}">
+</head>
+
+<div class="chatbot-container">
+    <h1>Chatbot</h1>
+    <div class="chat-window" id="chat-window">
+        <!-- Messages will be displayed here -->
+    </div>
+
+    <div class="input-area">
+        <input type="text" id="user-input" placeholder="Type a message..." />
+        <button onclick="sendMessage()">➤</button>
+    </div>
+</div>
+
+<script>
+    function sendMessage() {
+        const inputField = document.getElementById("user-input");
+        const message = inputField.value.trim();
+        if (message) {
+            displayMessage(message, "user");
+            inputField.value = "";
+            setTimeout(() => {
+                displayMessage("Hello! How can I assist you?", "bot");
+            }, 1000);
+        }
+    }
+
+    function displayMessage(text, sender) {
+        const chatWindow = document.getElementById("chat-window");
+        const messageDiv = document.createElement("div");
+        messageDiv.classList.add("message", sender);
+        messageDiv.textContent = text;
+        chatWindow.appendChild(messageDiv);
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+</script>
+
