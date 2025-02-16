@@ -8,7 +8,22 @@ from keras.models import load_model
 app = Flask(__name__)
 
 # Load trained AI model for plant disease detection
-model = load_model('Corn_Disease.h5')
+MODEL_PATHS = {
+    'Apple': 'models/Apple_Disease.h5',
+    'Corn': 'models/Corn_Disease.h5',
+    'Grapes': 'models/Grapes_Disease.h5',
+    'Potatos': 'models/Potato_Disease2.h5',
+    'Tomato': 'models/Tomato_Disease.h5',
+    'Wheat': 'models/Wheat_Disease.h5',
+    # Add more models as needed
+}
+
+models = {}
+
+for crop, path in MODEL_PATHS.items():
+    print(f"Loading model for {crop}...")
+    models[crop] = load_model(path)
+print("All models loaded successfully!")
 print('Model loaded. Check http://127.0.0.1:5000/')
 
 labels = {0: 'Daisy', 1: 'Dandelion', 2: 'Rose', 3: 'Sunflower', 4: 'Tulips'}
