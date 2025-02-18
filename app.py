@@ -42,6 +42,26 @@ def getResult(image_path):
 def home():
     return render_template('index.html')
 
+# routes for other all vegetabels or fruits
+@app.route('/corn')
+def corn():
+    return render_template('corn.html')
+@app.route('/grapes')
+def grapes():
+    return render_template('grapes.html')
+@app.route('/potato')
+def potato():
+    return render_template('potato.html')
+@app.route('/tomato')
+def tomato():
+    return render_template('tomato.html')
+@app.route('/wheat')
+def wheat():
+    return render_template('whaet.html')
+@app.route('/apple')
+def apple():
+    return render_template('apple.html')
+
 
 # Plant Disease Identifier Route
 @app.route('/plant-disease', methods=['GET', 'POST'])
