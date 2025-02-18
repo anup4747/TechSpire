@@ -1,6 +1,7 @@
 import os
 import numpy as np
-from flask import Flask, request, render_template
+import time
+from flask import Flask, request , redirect, render_template
 from werkzeug.utils import secure_filename
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from keras.models import load_model
@@ -26,7 +27,14 @@ for crop, path in MODEL_PATHS.items():
 print("All models loaded successfully!")
 print('Model loaded. Check http://127.0.0.1:5000/')
 
-labels = {0: 'Daisy', 1: 'Dandelion', 2: 'Rose', 3: 'Sunflower', 4: 'Tulips'}
+labels1 = {0: 'Apple__Apple_scab', 1: 'Apple_Black_rot', 2: 'Apple_Cedar_apple_rust', 3: 'Apple__healthy'}
+labels2 = {0: 'Corn__Common_Rust', 1: 'Corn_Gray_Leaf_Spot', 2: 'Corn_Healthy', 3: 'Corn__Northern_Leaf_Blight'}
+labels3 = {0: 'Potato__Early_Blight', 1: 'Potato_Healthy', 2: 'Potato__Late_Blight'}
+labels4 = {0: 'Tomato__Bacterial_spot', 1: 'Tomato_Early_blight', 2: 'Tomato_Late_blight', 3: 'Tomato_Leaf_Mold',
+           4: 'Tomato_Septoria_leaf_spot', 5: 'Tomato_Spider_mites_Two_spotted_spider_mite', 6: 'Tomato_Target_Spot',
+           7: 'Tomato_Tomato_Yellow_Leaf_Curl_Virus', 8: 'Tomato_Tomato_mosaic_virus', 9: 'Tomato__healthy'}
+labels5 = {0: 'Grape__Black_rot', 1: 'Grape_Esca(Black_Measles)', 2: 'Grape__Leaf_blight', 3: 'Grape__healthy'}
+labels6 = {0: 'Wheat__Brown_Rust', 1: 'Wheat_Healthy', 2: 'Wheat__Yellow_Rust'}
 
 # Function to process image and make prediction
 def getResult(image_path):
@@ -38,9 +46,27 @@ def getResult(image_path):
 
 
 # Home Route
-@app.route('/')
+@app.route('/', methods=['POST'])
 def home():
-    return render_template('index.html')
+    language = request.form.get('language')
+    # Here you would handle the translation based on the selected language
+    if language == 'marathi':
+        translation = "मराठी"
+    elif language == 'english':
+        translation = "English"
+    elif language == 'hindi':
+        translation = "हिंदी"
+    else:
+        translation = "Unknown"
+    
+    return render_template('index.html', translation=translation)
+@app.route('/greetings')
+def greetings():
+    return render_template('greetings.html')
+
+@app.route('/language')
+def select_language():
+    return render_template('langselection.html')
 
 # routes for other all vegetabels or fruits
 @app.route('/corn')
@@ -57,10 +83,13 @@ def tomato():
     return render_template('tomato.html')
 @app.route('/wheat')
 def wheat():
-    return render_template('whaet.html')
+    return render_template('wheat.html')
 @app.route('/apple')
 def apple():
     return render_template('apple.html')
+@app.route('/mango')
+def mango():
+    return render_template('mango.html')
 
 
 # Plant Disease Identifier Route
@@ -77,7 +106,7 @@ def plant_disease():
             f.save(file_path)
             
             predictions = getResult(file_path)
-            predicted_label = labels[np.argmax(predictions)]
+            predicted_label = labels1[np.argmax(predictions)]
             print(f'Predicted Disease: {predicted_label}')
             return predicted_label
     return render_template('plant_disease.html')
@@ -128,6 +157,9 @@ def submit_feedback():
         return redirect(url_for('submit_feedback'))
     return render_template('feedback.html')
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('notfound.html'), 404  # Ensure you return a status code
 
 if __name__ == '__main__':
     app.run(debug=True)

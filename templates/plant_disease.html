@@ -4,87 +4,66 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='main2.css') }}" />
 </head>
 
-<div class="disease-identifier">
-  <h1>Plant Disease Identifier</h1>
-  <p>Upload or Capture a photo of your plant to identify potential diseases</p>
+<html lang="en">
+<body>
+  
+    <div class="plantmenucontainer">
+        <h1 class="title">Plant Categories</h1>
 
-  <form action="/upload" method="POST" enctype="multipart/form-data">
-    <!-- Image Upload -->
-    <label for="upload" class="upload-box">
-      <div id="preview" class="preview-box">
-        <span id="upload-text">Click to upload or capture image</span>
-      </div>
-    </label>
-    <input
-      id="upload"
-      type="file"
-      name="image"
-      accept="image/*"
-      class="hidden"
-      onchange="previewImage(event)"
-    />
+        <div class="category">
+            <h2>Fruits</h2>
+            <div class="grid">
+                
+                <a href="/mango">
+                    <div class="item">
+                        <img src="https://i.pinimg.com/474x/f9/72/07/f972070d2f9cc38813d2292f77fab25b.jpg" alt="Apple">
+                        <p>Mango</p>
+                    </div>
+                </a>
+                <a href="/apple">
+                    <div class="item">
+                        <img src="https://i.pinimg.com/736x/66/13/f3/6613f3ddf0bf5ae30a0b2af2debf4d49.jpg" alt="Apple">
+                        <p>Apple</p>
+                    </div>
+                </a>
+                <a href="/grapes">
+                    <div class="item">
+                        <img src="https://i.pinimg.com/474x/b0/5e/45/b05e45bbfa3d8e2821d258c2c6ce2c79.jpg" alt="Grapes">
+                        <p>Grapes</p>
+                    </div>
+                </a>
+            </div>
+        </div>
 
-    <!-- Camera Capture -->
-    <div>
-      <video id="camera" class="hidden" autoplay></video>
-      <div>
-
-          <button type="button" id="capture-btn">Capture Image</button>
-          <button type="submit" id="capture-btn">Identify Disease</button>
+        <div class="category">
+            <h2>Leaf</h2>
+            <div class="grid">
+                <a href="/wheat">
+                    <div class="item">
+                        <img src="https://i.pinimg.com/736x/82/a4/6a/82a46a7161fa0bf2dacb3acc9ac48dd6.jpg" alt="Wheat">
+                        <p>Wheat</p>
+                    </div>
+                </a>
+                <a href="/corn">
+                    <div class="item">
+                        <img src="https://i.pinimg.com/736x/9d/22/85/9d22859f7d6402d9386c5654d843b213.jpg" alt="Corn">
+                        <p>Corn</p>
+                    </div>
+                </a>
+                <a href="/tomato">
+                    <div class="item">
+                        <img src="https://i.pinimg.com/736x/07/c6/98/07c6989be6c2db844934828f3bda528c.jpg" alt="Tomato">
+                        <p>Tomato</p>
+                    </div>
+                </a>
+                <a href="/potato">
+                    <div class="item">
+                        <img src="https://i.pinimg.com/474x/78/b3/18/78b31888e2852ce17d5c9a39d9b83af8.jpg" alt="Potato">
+                        <p>Potato</p>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
-
-    <canvas id="canvas" class="hidden"></canvas>
-
-    <input type="hidden" id="captured-image" name="captured_image" />
-
-  </form>
-</div>
-
-<script>
-  function previewImage(event) {
-    const file = event.target.files[0];
-    const previewBox = document.getElementById("preview");
-    const uploadText = document.getElementById("upload-text");
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        previewBox.style.backgroundImage = `url(${e.target.result})`;
-        uploadText.style.display = "none";
-      };
-      reader.readAsDataURL(file);
-    }
-  }
-
-  // Camera functionality
-  const camera = document.getElementById("camera");
-  const canvas = document.getElementById("canvas");
-  const captureBtn = document.getElementById("capture-btn");
-
-  navigator.mediaDevices
-    .getUserMedia({ video: true })
-    .then((stream) => {
-      camera.srcObject = stream;
-      camera.classList.remove("hidden");
-    })
-    .catch((error) => {
-      console.error("Camera access denied:", error);
-    });
-
-  captureBtn.addEventListener("click", function () {
-    const context = canvas.getContext("2d");
-    canvas.width = camera.videoWidth;
-    canvas.height = camera.videoHeight;
-    context.drawImage(camera, 0, 0, canvas.width, canvas.height);
-
-    const imageData = canvas.toDataURL("image/png");
-    document.getElementById(
-      "preview"
-    ).style.backgroundImage = `url(${imageData})`;
-    document.getElementById("upload-text").style.display = "none";
-
-    // Store the image data in a hidden input field to send with the form
-    document.getElementById("captured-image").value = imageData;
-  });
-</script>
+</body>
+</html>
