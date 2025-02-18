@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='main2.css') }}" />
+</head>
+
+<body>
+  <div class="langcontainer">
+    <h1>Choose your language:</h1>
+    <form action="/" method="post">
+      <select name="language">
+        <option value="marathi">Marathi</option>
+        <option value="english">English</option>
+        <option value="hindi">Hindi</option>
+      </select>
+      <br><br>
+      <input type="submit" value="Select">
+    </form>
+  </div>
+</body>
+
+</html>

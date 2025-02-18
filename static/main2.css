@@ -10,10 +10,11 @@ body {
 
 /* chat bot */
 .chatbot-container {
+  margin-top: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 90vh;
+  height: 80vh;
   padding: 20px;
 }
 
@@ -399,4 +400,174 @@ button:hover {
 
 .footer-links a:hover {
   text-decoration: underline;
+}
+
+.notfoundmain{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.notfoundcontainer {
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+}
+
+/* 404 Heading */
+.notfoundcontainer h1 {
+  
+  font-size: 72px;
+  color: #ff6b6b;
+  margin: 0;
+}
+
+/* Error Message */
+.notfoundcontainer p{
+  font-size: 18px;
+  color: #333;
+}
+
+
+
+.plantmenucontainer {
+  margin-top: 40px;
+  padding: 20px;
+}
+
+.plantmenucontainer .title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.plantmenucontainer .category {
+  margin-top: 40px;
+}
+
+.plantmenucontainer h2 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.plantmenucontainer .grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.plantmenucontainer .item {
+  width: 150px;
+  text-align: center;
+}
+
+.plantmenucontainer .item img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.plantmenucontainer .item p {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.plantmenucontainer a {
+  text-decoration: none;
+  color: black;
+}
+
+.plantmenucontainer a:hover .item img {
+  transform: scale(1.05);
+  transition: 0.3s;
+}
+/* this is lan section */
+.langcontainer{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.langcontainer h1 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.langcontainer form {
+  width: 36%;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.langcontainer select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.langcontainer input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.langcontainer input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* this is greeting section  */
+/* Full-page styling */
+.greeting-container{
+  background-color: #4caf50; /* Deep green theme */
+  color: white; /* White text */
+  font-family: "Arial", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Centered container for greeting text */
+.greeting-container {
+  text-align: center;
+}
+
+/* Typing effect text */
+#greeting-text {
+  font-size: 48px;
+  font-weight: bold;
+  border-right: 2px solid white; /* Simulate cursor effect */
+  padding-right: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  animation: blinkCursor 0.8s infinite;
+}
+
+/* Cursor blinking effect */
+@keyframes blinkCursor {
+  50% {
+      border-color: transparent;
+  }
 }

@@ -1,0 +1,32 @@
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='main2.css') }}" />
+</head>
+
+<html lang="en">
+
+<body>
+  <div class="greeting-container" id="greeting-container">
+    <div id="greeting-text"></div>
+  </div>
+</body>
+<script>
+  const text = "Welcome to FarmSupport! 👋";
+  let i = 0;
+
+  function typeEffect() {
+    const greetingText = document.getElementById("greeting-text"); // Fixed ID
+    if (i < text.length) {
+      greetingText.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typeEffect, 100); // Adjust typing speed
+    } else {
+      setTimeout(() => {
+        window.location.href = "/language"; // Redirect after typing
+      }, 2000);
+    }
+  }
+
+  window.onload = typeEffect; // Ensure the function runs when the page loads
+</script>
+
+</html>
