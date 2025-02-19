@@ -28,17 +28,19 @@
     <div>
       <video id="camera" class="hidden" autoplay></video>
       <div>
-
-          <button type="button" id="capture-btn">Capture Image</button>
-          <button type="submit" id="capture-btn">Identify Disease</button>
-        </div>
+        <button type="button" id="capture-btn">Capture Image</button>
+        <button type="submit" id="capture-btn">Identify Disease</button>
+      </div>
     </div>
 
     <canvas id="canvas" class="hidden"></canvas>
 
     <input type="hidden" id="captured-image" name="captured_image" />
-
   </form>
+
+  {% if prediction %}
+  <h3>Predicted Disease: {{ prediction }}</h3>
+  {% endif %}
 </div>
 
 <script>
@@ -78,7 +80,7 @@
     canvas.height = camera.videoHeight;
     context.drawImage(camera, 0, 0, canvas.width, canvas.height);
 
-    const imageData = canvas.toDataURL("image/png");
+    const imageData = canvas.toDataURL("image/jpg");
     document.getElementById(
       "preview"
     ).style.backgroundImage = `url(${imageData})`;
