@@ -7,5 +7,5 @@ pip install Flask tensorflow numpy pillow werkzeug
 # verify dependancies 
 pip list | grep -E 'Flask|tensorflow|numpy|pillow|werkzeug'
 
-#Run 
+# Run 
 python app.py
