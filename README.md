@@ -1,10 +1,12 @@
-# plant_disease_detection
+# Welcome to Farm support
 
-# install all dependancies
+# Clone this
+git clone https://github.com/anup4747/TechSpire.git
 
+# Install all dependancies
 pip install Flask tensorflow numpy pillow werkzeug
 
-# verify dependancies 
+# Verify dependancies 
 pip list | grep -E 'Flask|tensorflow|numpy|pillow|werkzeug'
 
 # Run 
