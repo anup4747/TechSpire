@@ -281,7 +281,8 @@ button:hover {
 
 .weather-container {
   text-align: center;
-  margin: 40px auto;
+  margin: 0px auto;
+  margin-top: 100px;
   max-width: 600px;
   background: #f8fafc;
   padding: 20px;
@@ -327,6 +328,7 @@ button:hover {
 /* feedback */
 
 .feedback-section {
+  margin-top: 100px;
   padding: 50px 20px;
   background-color: #f3f4f6;
   text-align: center;
