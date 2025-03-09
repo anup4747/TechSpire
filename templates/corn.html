@@ -39,7 +39,11 @@
   </form>
 
   {% if prediction %}
-  <h3>Predicted Disease: {{ prediction }}</h3>
+  <div class="result-section">
+    <h3>Predicted Result: <span>{{ prediction }}</span></h3>
+    <h4>Confidence: <span>{{ confidence }}%</span></h4>
+    <img src="{{ image_url }}" alt="Uploaded Image" class="result-image" />
+  </div>
   {% endif %}
 </div>
 

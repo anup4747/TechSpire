@@ -36,17 +36,23 @@ tomato_labels = {0: 'Tomato__Bacterial_spot', 1: 'Tomato_Early_blight', 2: 'Toma
 grapes_labels = {0: 'Grape__Black_rot', 1: 'Grape_Esca(Black_Measles)', 2: 'Grape__Leaf_blight', 3: 'Grape__healthy'}
 wheat_labels = {0: 'Wheat__Brown_Rust', 1: 'Wheat_Healthy', 2: 'Wheat__Yellow_Rust'}
 
+
 # Function to process image and make prediction
-def predict_disease(model,image_path, labels):
+def predict_disease(model, image_path, labels):
     """Loads an image, preprocesses it, and returns the predicted disease label."""
-    img = load_img(image_path, target_size=(128, 128))
-    x = img_to_array(img) / 255.0
-    x = np.expand_dims(x, axis=0)
-    
-    predictions = model.predict(x)[0]
-    predicted_label = labels[np.argmax(predictions)]
-    print(predicted_label)
-    return predicted_label
+    try:
+        img = load_img(image_path, target_size=(128, 128))
+        x = img_to_array(img) / 255.0
+        x = np.expand_dims(x, axis=0)
+        
+        predictions = model.predict(x)[0]
+        predicted_label = labels[np.argmax(predictions)]
+        confidence = round(np.max(predictions) * 100, 2)
+        
+        return predicted_label, confidence
+    except Exception as e:
+        return f"Error: {str(e)}", 0  # Return error message and 0 confidence
+
 
 
 # Home Route
@@ -79,7 +85,8 @@ def select_language():
 @app.route('/corn', methods=['GET', 'POST'])
 def corn():
     prediction = None  # Initialize prediction to None at the beginning
-
+    confidence = None
+    img_path = None
     if request.method == 'POST':
         f = request.files.get('image')  # Use `.get()` to avoid errors if 'image' is missing
 
@@ -90,16 +97,20 @@ def corn():
 
             file_path = os.path.join(upload_dir, secure_filename(f.filename))
             f.save(file_path)
+            img_path = os.path.join("/uploads/corn", secure_filename(f.filename))
+            img_path = img_path.replace("\\", "/")
+           
 
             # Predict using Corn model
-            prediction = predict_disease(model=models['Corn'], image_path=file_path, labels=corn_labels)
-
-    return render_template('corn.html', prediction=prediction)
+            prediction, confidence = predict_disease(model=models['Corn'], image_path=file_path,labels=corn_labels)
+    return render_template('corn.html', prediction=prediction, confidence=confidence,image_url=img_path)
 
 
 @app.route('/grapes' , methods=['GET', 'POST'])
 def grapes():
     prediction = None  # Initialize prediction to None at the beginning
+    confidence = None
+    img_path = None
 
     if request.method == 'POST':
         f = request.files.get('image')  # Use `.get()` to avoid errors if 'image' is missing
@@ -111,14 +122,18 @@ def grapes():
 
             file_path = os.path.join(upload_dir, secure_filename(f.filename))
             f.save(file_path)
+            img_path = os.path.join("/uploads/grapes", secure_filename(f.filename))
+            img_path = img_path.replace("\\", "/")
 
-            # Predict using Corn model
-            prediction = predict_disease(model=models['Grapes'], image_path=file_path, labels=grapes_labels)
-    return render_template('grapes.html', prediction=prediction)
+            # Predict using grapes model
+            prediction, confidence = predict_disease(model=models['Grapes'], image_path=file_path,labels=grapes_labels)
+    return render_template('grapes.html', prediction=prediction, confidence=confidence,image_url=img_path)
 
 @app.route('/potato' , methods=['GET', 'POST'])
 def potato():
     prediction = None  # Initialize prediction to None at the beginning
+    confidence = None
+    img_path = None
 
     if request.method == 'POST':
         f = request.files.get('image')  # Use `.get()` to avoid errors if 'image' is missing
@@ -130,13 +145,18 @@ def potato():
 
             file_path = os.path.join(upload_dir, secure_filename(f.filename))
             f.save(file_path)
+            img_path = os.path.join("/uploads/potato", secure_filename(f.filename))
+            img_path = img_path.replace("\\", "/")
 
-            # Predict using Corn model
-            prediction = predict_disease(model=models['Potatos'], image_path=file_path, labels=pototo_labels)
-    return render_template('potato.html', prediction=prediction)
+            # Predict using Potato model
+            prediction, confidence = predict_disease(model=models['Potatos'], image_path=file_path,labels=pototo_labels)
+    return render_template('potato.html', prediction=prediction, confidence=confidence,image_url=img_path)
+
 @app.route('/tomato' , methods=['GET', 'POST'])
 def tomato():
     prediction = None  # Initialize prediction to None at the beginning
+    confidence = None
+    img_path = None
 
     if request.method == 'POST':
         f = request.files.get('image')  # Use `.get()` to avoid errors if 'image' is missing
@@ -148,13 +168,19 @@ def tomato():
 
             file_path = os.path.join(upload_dir, secure_filename(f.filename))
             f.save(file_path)
+            img_path = os.path.join("/uploads/tomato", secure_filename(f.filename))
+            img_path = img_path.replace("\\", "/")
 
-            # Predict using Corn model
-            prediction = predict_disease(model=models['Tomato'], image_path=file_path, labels=tomato_labels)
-    return render_template('tomato.html', prediction=prediction)
+            # Predict using tomato model
+            prediction, confidence = predict_disease(model=models['Tomato'], image_path=file_path,labels=tomato_labels)
+    return render_template('tomato.html', prediction=prediction, confidence=confidence,image_url=img_path)
+
+
 @app.route('/wheat' , methods=['GET', 'POST'])
 def wheat():
     prediction = None  # Initialize prediction to None at the beginning
+    confidence = None
+    img_path = None
 
     if request.method == 'POST':
         f = request.files.get('image')  # Use `.get()` to avoid errors if 'image' is missing
@@ -166,14 +192,17 @@ def wheat():
 
             file_path = os.path.join(upload_dir, secure_filename(f.filename))
             f.save(file_path)
+            img_path = os.path.join("/uploads/wheat", secure_filename(f.filename))
+            img_path = img_path.replace("\\", "/")
+            # Predict using Wheat model
+            prediction, confidence = predict_disease(model=models['Wheat'], image_path=file_path,labels=wheat_labels)
+    return render_template('wheat.html', prediction=prediction, confidence=confidence,image_url=img_path)
 
-            # Predict using Corn model
-            prediction = predict_disease(model=models['Wheat'], image_path=file_path, labels=wheat_labels)
-    return render_template('wheat.html', prediction=prediction)
 @app.route('/apple' , methods=['GET', 'POST'])
 def apple():
     prediction = None  # Initialize prediction to None at the beginning
-
+    confidence = None
+    img_path = None
     if request.method == 'POST':
         f = request.files.get('image')  # Use `.get()` to avoid errors if 'image' is missing
 
@@ -184,14 +213,15 @@ def apple():
 
             file_path = os.path.join(upload_dir, secure_filename(f.filename))
             f.save(file_path)
+            img_path = os.path.join("/uploads/apple", secure_filename(f.filename))
+            img_path = img_path.replace("\\", "/")
+            # Predict using Wheat model
+            prediction, confidence = predict_disease(model=models['Apple'], image_path=file_path,labels=apple_labels)
+    return render_template('apple.html', prediction=prediction, confidence=confidence,image_url=img_path)
 
-            # Predict using Corn model
-            prediction = predict_disease(model=models['Apple'], image_path=file_path, labels=apple_labels)
-    return render_template('apple.html', prediction=prediction)
 @app.route('/mango')
 def mango():
     return render_template('mango.html')
-
 
 # Plant Disease Identifier Route
 @app.route('/plant-disease', methods=['GET', 'POST'])
@@ -200,7 +230,6 @@ def plant_disease():
 
 
 # Weather Page Route
-
 @app.route('/weather')
 def weather():
     weather_data = {
@@ -228,12 +257,10 @@ def weather():
     }
     return render_template('weather.html', **weather_data)
 
-
 # Chatbot Page Route
 @app.route('/chatbot')
 def chatbot():
     return render_template('chatbot.html')
-
 
 # Feedback Page Route
 @app.route('/feedback', methods=['GET', 'POST'])
